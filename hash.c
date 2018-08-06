@@ -69,8 +69,9 @@ const char* word_to_notes(const Hash *h, const char* word)
 	int index = abs(DJB_hash(word) % HASH_CAPACITY);
 
 	Translate *p = (h + index)->head;
-	while (p != NULL && strcmp(p->word, word) != 0)
-	{
+	
+	while (p != NULL && strcmp(word, p->word) != 0)
+	{	
 		p = p->next;
 	}
 

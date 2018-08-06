@@ -23,7 +23,7 @@ void file_to_hash(const char* filename, char *word, char *notes, Hash *h)
 			line[strlen(line) - 1] = '\0';
 		}
 	
-		if (strchr(line, '.') != NULL)
+	if (strchr(line, '.') != NULL)
 		{
 			line_to_word_notes(line, word, notes);
 			insert_hash(h, word, notes);
@@ -42,7 +42,7 @@ void line_to_word_notes(const char *line, char *word, char *notes)
 		++i;
 	}
 
-	while (line[i] != ' ')
+	while (line[i] != '\0' && line[i] != ' ')
 	{
 		word[j++] = line[i++];
 	}
@@ -54,7 +54,7 @@ void line_to_word_notes(const char *line, char *word, char *notes)
 	}
 
 	j = 0;
-	while (line[i] != '\0' && line[i] != ' ')
+	while (line[i] != '\0')
 	{
 		notes[j++] = line[i++];
 	}	

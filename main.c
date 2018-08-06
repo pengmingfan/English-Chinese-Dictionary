@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 
 #include "hash.h"
 #include "file.h"
@@ -10,11 +12,15 @@ static void query_word(const Hash *h);
 
 int main()
 {
-	char word[50], notes[100];
+	char *word = (char*)malloc(sizeof(char) * 50);
+	char *notes = (char*)malloc(sizeof(char) * 100);
 
 	Hash *h = create_hash(SIZE);
 
-	file_to_hash("Englishwords.txt", word, notes, h);	
+	file_to_hash("Englishwords.txt", word, notes, h);
+
+	free(word);
+	free(notes);
 
 	printf("单词总数 : %d\n单词哈希值冲突率: %.2f%%\n", 
 		 size_hash(), 100 * conflict_rate());
@@ -23,12 +29,14 @@ int main()
 
 	destroy_hash(&h);
 
+
 	return 0;
 }
 
 void query_word(const Hash *h)
 {
-	char buf[50];
+	char *buf = (char*)malloc(sizeof(char) * 50);
+
 	do {
 		printf("\n请输入要查询的单词, 按回车结束 : ");
 
@@ -48,5 +56,7 @@ void query_word(const Hash *h)
 
 		printf("\n输入q加回车退出, 按回车继续查询单词: ");	
 	} 
-	while (strcmp(fgets(buf, 50, stdin), "q\n") != 0);	
+	while (strcmp(fgets(buf, 50, stdin), "q\n") != 0);
+
+	free(buf);
 }
