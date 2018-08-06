@@ -44,23 +44,23 @@ void insert_hash(Hash *h, const char *word, const char *notes)
 	
 	Translate *p = (Translate*)malloc(sizeof(Translate));
 	assert(p != NULL);
+	
+	p->word = (char*)malloc(strlen(word) + 1);
+	assert(p->word != NULL);
+	strcpy(p->word, word);
 
-	p->word = word;
-	p->notes = notes;
-	p->next = NULL;
+	p->notes = (char*)malloc(strlen(notes) + 1);
+	assert(p->notes != NULL);
+	strcpy(p->notes, notes);
 
-	if ((h + index)->head == NULL)
+	if ((h + index)->head != NULL)
 	{
-		(h + index)->head = p;
-	}
-	else
-	{
-		p->next = (h + index)->head;
-		(h + index)->head = p;
-
 		++HASH_CONFLICT;
 	}
-	
+
+	p->next = (h + index)->head;
+	(h + index)->head = p;
+
 	++HASH_SIZE;
 }
 
@@ -93,6 +93,8 @@ void destroy_hash(Hash **p_h)
 		while (p != NULL)
 		{
 			q = p->next;
+			free(p->word);
+			free(p->notes);
 			free(p);
 			p = q;
 		}

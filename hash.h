@@ -3,8 +3,8 @@
 
 typedef struct translate_t
 {
-	const char *word;
-	const char *notes;
+	char *word;
+	char *notes;
 	struct translate_t *next;
 } Translate;
 

@@ -3,7 +3,6 @@
 
 #include "hash.h"
 
-void file_to_hash(const char* filename, char (*word)[50], 
-	char (*notes)[50], Hash *h);
+void file_to_hash(const char* filename, char *word, char* notes, Hash *h);
 
 #endif

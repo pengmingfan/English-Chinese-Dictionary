@@ -10,7 +10,7 @@ static void query_word(const Hash *h);
 
 int main()
 {
-	char word[SIZE][50], notes[SIZE][50], buf[50];
+	char word[50], notes[100];
 
 	Hash *h = create_hash(SIZE);
 
