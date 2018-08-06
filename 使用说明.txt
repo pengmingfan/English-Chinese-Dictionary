@@ -1,0 +1,1 @@
+安装方法 gcc *.c -o Dictionary
